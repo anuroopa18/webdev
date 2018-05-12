@@ -10,7 +10,7 @@
           href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <!--<link href="user-admin.style.client.css" rel="stylesheet"/> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="../services/user.service.client.js"></script>
+    <script src="../../services/user.service.client.js"></script>
     <script src="user-admin.controller.client.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -31,36 +31,45 @@
             <th></th>
         </tr>
         <tr>
-            <th><input class="form-control" placeholder='jdoe'/></th>
-            <th><input class="form-control" type="password"/></th>
-            <th><input class="form-control" placeholder='John'/></th>
-            <th><input class="form-control" placeholder='Doe'/></th>
-            <th><input class="form-control" placeholder='Student'/></th>
-            <th>
-                <button class="btn btn-success">Create</button>
-            </th>
+            <td><input id="usernameFld" class="form-control" placeholder='jdoe'/></td>
+            <td><input id="passwordFld" class="form-control" type="password"/></td>
+            <td><input id="firstNameFld" class="form-control" placeholder='John'/></td>
+            <td><input id="lastNameFld" class="form-control" placeholder='Doe'/></td>
+            <td><select id="roleFld" class="form-control">
+                <option value="Faculty">Faculty</option>
+                <option value="Student">Student</option>
+            </select></td>
+            </td>
+            <!--<td>
+                <button id="createUser" class="btn btn-success">Create</button>
+            </td>-->
+            <td><span class="float-right" style="white-space: nowrap">
+             <i class="fa-2x fa fa-search wbdv-search"></i> <i
+                    class="fa-2x fa fa-plus wbdv-create"></i> <i
+                    class="fa-2x fa fa-check wbdv-update"></i>
+                </span>
+            </td>
+
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>anuroopa</td>
-            <td>****</td>
-            <td>Anuroopa</td>
-            <td>Tilavalli Shettar</td>
-            <td>Student</td>
+        <tr class="template">
+            <td class="username"> anuroopa</td>
+            <td class="password"></td>
+            <td class="firstName">Anuroopa</td>
+            <td class="lastName">Tilavalli Shettar</td>
+            <td class="role">Student</td>
+            <!--<td>
+                <button class="delete btn btn-danger">Delete</button>
+                <button class="edit btn btn-danger">Edit</button>
+            </td>-->
             <td>
-                <button class="btn btn-danger">Delete</button>
+             <span>
+               <i  class="delete fa-2x fa fa-times"></i>
+               <i  class="edit fa-2x fa fa-pencil"></i>
+             </span>
             </td>
-        </tr>
-        <tr>
-            <td>anuroopa</td>
-            <td>****</td>
-            <td>Anuroopa</td>
-            <td>Tilavalli Shettar</td>
-            <td>Student</td>
-            <td>
-                <button class="btn btn-danger">Delete</button>
-            </td>
+
         </tr>
         </tbody>
         <tfoot></tfoot>
