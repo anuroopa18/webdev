@@ -8,6 +8,7 @@
         tbody = $('tbody');
         template = $('.template');
         $('.wbdv-create').click(createUser);
+        $('.wbdv-update').click(updateUser);
         findAllUsers();
     }
 
@@ -16,7 +17,6 @@
     }
 
     function createUser() {
-        console.log('createUser');
         var username = $('#usernameFld').val();
         var password = $('#passwordFld').val();
         var firstName = $('#firstNameFld').val();
@@ -35,6 +35,25 @@
             .createUser(user)
             .then(findAllUsers);
 
+    }
+
+    function updateUser(){
+        var userId = $('#userIdFld').val();
+        var username = $('#usernameFld').val();
+        var password = $('#passwordFld').val();
+        var firstName = $('#firstNameFld').val();
+        var lastName = $('#lastNameFld').val();
+        var role = $('#roleFld').val();
+
+        var user = {
+            username: username,
+            password: password,
+            firstName: firstName,
+            lastName: lastName,
+            role: role
+
+        }
+        userService.updateUser(userId,user).then(findAllUsers);
     }
 
     function renderUsers(users) {
@@ -58,8 +77,6 @@
         }
 
         function deleteUser(event) {
-            console.log('deleteUser');
-            console.log(event);
             var deletebtn = $(event.currentTarget);
             var userId = deletebtn.parent().parent().parent().attr('id');
             userService
@@ -68,8 +85,20 @@
         }
 
         function editUser(event) {
-            console.log('editUser');
-            console.log(event);
+            var editbtn = $(event.currentTarget);
+            var userId = editbtn.parent().parent().parent().attr('id');
+            userService.findUserById(userId).then(renderUser);
+
+        }
+
+        function renderUser(user){
+            $('#userIdFld').val(user.id)
+            $('#usernameFld').val(user.username);
+            $('#passwordFld').val(user.password);
+            $('#firstNameFld').val(user.firstName);
+            $('#lastNameFld').val(user.lastName);
+            $('#roleFld').val(user.role);
+
         }
     }
 
