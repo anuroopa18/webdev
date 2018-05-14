@@ -12,16 +12,18 @@
         passwordFld= $('#password').val();
         verifyPasswordFld=$('#verifyPassword').val();
 
-        if(passwordFld != passwordFld){
-           alert('Passwords doesnt ')
+        if(passwordFld != verifyPasswordFld){
+           alert('Passwords doesnt match');
+        }
+        else {
+            var registerUser = {
+                username: usernameFld,
+                password: passwordFld
+
+            }
+            userService.register(registerUser);
         }
 
-        var registerUser = {
-            username: usernameFld,
-            password: passwordFld
-
-        }
-        userService.register(registerUser);
 
 
     }
