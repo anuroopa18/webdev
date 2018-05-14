@@ -1,0 +1,5 @@
+@charset "UTF-8";
+#btnSubmit{
+    width: -webkit-fill-available;
+    height: 53px  !important ;
+}
