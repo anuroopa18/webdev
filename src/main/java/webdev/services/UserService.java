@@ -3,6 +3,9 @@ package webdev.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,6 +44,10 @@ public class UserService {
 		if(data.isPresent()) {
 			User user = data.get();
 			user.setFirstName(newUser.getFirstName());
+			user.setUsername(newUser.getUsername());
+			user.setLastName(newUser.getLastName());
+			user.setPassword(newUser.getPassword());
+			user.setRole(newUser.getRole());
 			repository.save(user);
 			return user;
 		}
@@ -53,6 +60,27 @@ public class UserService {
 		if(data.isPresent()) {
 			return data.get();
 		}
+		return null;
+	}
+	
+	@GetMapping("/api/findUser/{username}")
+	public User findUserByUsername(@PathVariable("username") String username) {
+		Optional<User> data = repository.findUserByUsername(username);
+		if(data.isPresent()) {
+			return data.get();
+		}
+		return null;
+	}
+	
+	@PostMapping("/api/register")
+	public User register(@RequestBody User user,HttpServletResponse response) {
+		if (findUserByUsername(user.getUsername()) != null){
+			response.setStatus(401);
+		}
+		else{
+		 return createUser(user);
+		}
+		
 		return null;
 	}
 }
