@@ -8,11 +8,17 @@
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link href="register.style.client.css" rel="stylesheet"/>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous">
+    </script>
+    <script src="../../services/user.service.client.js"></script>
+    <script src="register.controller.client.js"></script>
+
 </head>
 <body>
 <div class="container">
 <h1>Sign Up</h1>
-<form>
     <div class="form-group">
         <label for="username" style="font-size: large">Username</label>
         <input class="form-control form-control-lg" id="username"  placeholder="Enter username">
@@ -25,8 +31,7 @@
         <label for="verifyPassword" style="font-size: large">Verify Password</label>
         <input type="password" class="form-control form-control-lg" id="verifyPassword" placeholder="Verify Password">
     </div>
-    <button id="btnSubmit" type="submit" style="width: -webkit-fill-available;" class="btn btn-primary">Sign Up</button>
-</form>
+    <button id="btnSubmit"  style="width: -webkit-fill-available;" class="btn btn-primary">Sign Up</button>
 </div>
 </body>
 </html>
