@@ -15,6 +15,8 @@ function UserServiceClient() {
         '/api/register';
     this.loginUrl=
         '/api/login';
+    this.findUserByCredentailsUrl =
+        '/api/findUserByCredentials';
     var self = this;
 
     function findAllUsers(){
@@ -81,17 +83,20 @@ function UserServiceClient() {
             headers:{
                 'content-type': 'application/json'
             }
-        }).then(function(response) {
-            if(response.status == 401)
-            {
-                alert('User already exists!');
-            }
-            else
-            {
-                alert('Registration successful!')
-            }
         });
 
+    }
+
+    function findUserByCredentials(user){
+        return fetch(self.findUserByCredentailsUrl,{
+            method:'post',
+            body: JSON.stringify(user),
+            headers:{
+                'content-type': 'application/json'
+            }
+        }).then(function(response){
+            return response.json();
+        });
     }
 
     function login(loginUser){
@@ -101,8 +106,6 @@ function UserServiceClient() {
             headers:{
                 'content-type': 'application/json'
             }
-        }).then(function(response) {
-            return response.json();
         });
 
     }

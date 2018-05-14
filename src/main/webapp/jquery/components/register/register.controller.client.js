@@ -21,7 +21,16 @@
                 password: passwordFld
 
             }
-            userService.register(registerUser);
+            userService.register(registerUser).then(function(response) {
+                if(response.status == 401)
+                {
+                    alert('User already exists!');
+                }
+                else
+                {
+                    alert('Registration successful!')
+                }
+            });
         }
 
 

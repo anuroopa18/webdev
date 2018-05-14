@@ -83,4 +83,25 @@ public class UserService {
 		
 		return null;
 	}
+	
+	@GetMapping("/api/findUserByCredentials/{user}")
+	public User findUserByCredentails(@PathVariable("user") User user) {
+		Optional<User> data = repository.findUserByCredentials(user.getUsername(),user.getPassword());
+		if(data.isPresent()) {
+			return data.get();
+		}
+		return null;
+	}
+	
+	@PostMapping("/api/login")
+	public User login(@RequestBody User user,HttpServletResponse response) {
+		if(findUserByCredentails(user) == null) {
+			response.setStatus(401);
+		}
+		else
+		{
+			return user;
+		}
+		return null;
+	}
 }

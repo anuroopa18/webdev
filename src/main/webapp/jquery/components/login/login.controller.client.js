@@ -14,7 +14,16 @@
             password: passwordFld
 
         }
-        userService.login(loginUser);
+        userService.login(loginUser).then(function(response) {
+            if(response.status == 401)
+            {
+                alert('User does not exist!');
+            }
+            else
+            {
+                alert('Login successful!')
+            }
+        });
 
     }
 })();
