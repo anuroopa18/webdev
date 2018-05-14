@@ -1,5 +1,7 @@
 package webdev.models;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,7 +19,7 @@ public class User {
 	private String role;
 	private String phone;
 	private String email;
-	private String dateOfBirth;
+	private Date dateOfBirth;
 	
 	
 	public String getPhone() {
@@ -32,10 +34,10 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getDateOfBirth() {
+	public Date getDateOfBirth() {
 		return dateOfBirth;
 	}
-	public void setDateOfBirth(String dateOfBirth) {
+	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 	public String getRole() {
