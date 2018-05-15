@@ -4,6 +4,7 @@ function UserServiceClient() {
     this.findUserById = findUserById;
     this.deleteUser = deleteUser;
     this.updateUser = updateUser;
+    this.updateProfile = updateProfile;
     this.findUserByUsername = findUserByUsername;
     this.register = register;
     this.login=login;
@@ -17,6 +18,7 @@ function UserServiceClient() {
         '/api/login';
     this.findUserByCredentailsUrl =
         '/api/findUserByCredentials';
+    this.updateProfileUrl ='/api/profile';
     var self = this;
 
     function findAllUsers(){
@@ -28,8 +30,6 @@ function UserServiceClient() {
     function deleteUser(userId){
         return fetch(self.url + '/' + userId,{
             method:'delete'
-        }).then(function (response) {
-            alert('User Deleted!')
         });
     }
 
@@ -48,10 +48,6 @@ function UserServiceClient() {
                 'content-type': 'application/json'
             }
 
-
-        }).then(function (response) {
-            alert('User added');
-
         });
     }
     function updateUser(userId,user){
@@ -62,9 +58,7 @@ function UserServiceClient() {
                 'content-type': 'application/json'
             }
         }).then(function(response){
-            alert('User updated!');
             return response.json();
-
         });
     }
 
@@ -83,6 +77,8 @@ function UserServiceClient() {
             headers:{
                 'content-type': 'application/json'
             }
+        }).then(function(response) {
+            return response.json();
         });
 
     }
@@ -99,15 +95,31 @@ function UserServiceClient() {
         });
     }
 
-    function login(loginUser){
+    function login(user){
         return fetch(self.loginUrl,{
             method:'post',
-            body: JSON.stringify(loginUser),
+            body: JSON.stringify(user),
             headers:{
                 'content-type': 'application/json'
             }
+        }).then(function(response){
+            return response.json();
+
         });
 
+    }
+
+    function updateProfile(user){
+        return fetch(self.updateProfileUrl ,{
+            method:'put',
+            body: JSON.stringify(user),
+            headers:{
+                'content-type': 'application/json'
+            }
+        }).then(function(response){
+            return response.json();
+
+        });
     }
 
 

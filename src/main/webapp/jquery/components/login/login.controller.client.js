@@ -21,7 +21,8 @@
             }
             else
             {
-                alert('Login successful!')
+                 window.location.href = "/jquery/components/profile/profile.template.client.html?username="
+                     + response.username + "&userId=" + response.id;
             }
         });
 

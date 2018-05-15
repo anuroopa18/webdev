@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -77,7 +75,8 @@ public class UserService {
 		if (findUserByUsername(user.getUsername()) != null){
 			response.setStatus(401);
 		}
-		else{
+		else
+		{
 		 return createUser(user);
 		}
 		
@@ -95,11 +94,30 @@ public class UserService {
 	
 	@PostMapping("/api/login")
 	public User login(@RequestBody User user,HttpServletResponse response) {
+		
+		User checkUser;
 		if(findUserByCredentails(user) == null) {
 			response.setStatus(401);
 		}
 		else
 		{
+			checkUser= findUserByUsername(user.getUsername());
+			return checkUser;
+		}
+		return null;
+	}
+	
+	@PutMapping("/api/profile")
+	public User updateProfile(@RequestBody User newUser) {
+		Optional<User> data = repository.findUserByUsername(newUser.getUsername());
+		if(data.isPresent()) {
+			User user = data.get();
+			user.setUsername(newUser.getUsername());
+			user.setPhone(newUser.getPhone());
+			user.setEmail(newUser.getEmail());
+			user.setRole(newUser.getRole());
+			user.setDateOfBirth(newUser.getDateOfBirth());
+			repository.save(user);
 			return user;
 		}
 		return null;

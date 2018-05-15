@@ -33,7 +33,10 @@
         }
         userService
             .createUser(user)
-            .then(findAllUsers);
+            .then(findAllUsers,function (response) {
+                alert('User added');
+
+            });
 
     }
 
@@ -53,7 +56,10 @@
             role: role
 
         }
-        userService.updateUser(userId,user).then(findAllUsers);
+        userService.updateUser(userId,user).then(findAllUsers,function(response){
+            alert('User updated!');
+
+        });
     }
 
     function renderUsers(users) {
@@ -81,7 +87,9 @@
             var userId = deletebtn.parent().parent().parent().attr('id');
             userService
                 .deleteUser(userId)
-                .then(findAllUsers);
+                .then(findAllUsers,function (response) {
+                    alert('User Deleted!')
+                });
         }
 
         function editUser(event) {
