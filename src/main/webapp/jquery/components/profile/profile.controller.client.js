@@ -9,8 +9,8 @@
     function main() {
         $('#btnLogout').click(logout);
         $('#btnUpdate').click(updateProfile);
-        qUsername=GetURLParameter('username');
-        qUserId=GetURLParameter('userId');
+        qUsername=getURLParameter('username');
+        qUserId=getURLParameter('userId');
         findUserById(qUserId);
     }
     function logout() {
@@ -18,7 +18,7 @@
 
     }
 
-    function GetURLParameter(sParam) {
+    function getURLParameter(sParam) {
         var sPageURL = window.location.search.substring(1);
         var sURLVariables = sPageURL.split('&');
         for (var i = 0; i < sURLVariables.length; i++) {
@@ -38,18 +38,64 @@
         $('#phone').val(user.phone);
         $('#email').val(user.email);
         $('#role').val(user.role);
-
         $('#datepicker').val(user.dateOfBirth);
 
     }
 
+    function validateEmail(email) {
+        var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+        return emailReg.test( email );
+    }
+
+
 
     function updateProfile() {
-         username = $('#username').val();
-         phone = $('#phone').val();
-         email = $('#email').val();
-         role = $('#role').val();
-         dateOfbirth = $('#datepicker').val();
+        if ($('#username').val().length == 0){
+            alert('Please provide Username');
+            return;
+        }
+        else {
+            username = $('#username').val();
+        }
+        if($('#phone').val().length == 0){
+            alert('Please provide a valid phone number');
+            return;
+        }
+        else {
+            phone = $('#phone').val();
+        }
+        if($('#email').val().length == 0){
+            alert('Please provide a valid email address');
+            return;
+        }
+        else {
+
+            email = $('#email').val();
+            if(validateEmail(email)== true){
+                email = $('#email').val();
+            }
+            else
+            {
+                alert('Please provide valid email address');
+                return;
+            }
+        }
+
+
+        if($('#role').val().length == 0){
+            alert('Please select one of the roles');
+            return;
+        }
+        else {
+            role = $('#role').val();
+        }
+        if($('#datepicker').datepicker({ dateFormat: "mm/dd/yyyy" }).val().length == 0){
+            alert('Please select date of birth');
+            return;
+        }
+        else {
+            dateOfbirth = $('#datepicker').datepicker({ dateFormat: "mm/dd/yyyy" }).val();
+        }
 
         var user = {
             username: username,

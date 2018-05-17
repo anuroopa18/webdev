@@ -7,8 +7,21 @@
         $('.btn').click(login);
     }
     function login() {
-        usernameFld= $('#username').val();
-        passwordFld= $('#password').val();
+        if($('#username').val().length ==0){
+            alert('Please provide a valid username');
+            return;
+        }
+        else{
+            usernameFld= $('#username').val();
+        }
+        if($('#password').val().length == 0){
+            alert('Please provide a password');
+            return;
+        }
+        else{
+            passwordFld= $('#password').val();
+        }
+
         var loginUser = {
             username: usernameFld,
             password: passwordFld
