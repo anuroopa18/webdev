@@ -49,6 +49,7 @@
 
         if(passwordFld != verifyPasswordFld){
            alert('Passwords doesnt match');
+           return;
         }
         else {
             var registerUser = {

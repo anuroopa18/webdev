@@ -1,6 +1,7 @@
 (function () {
     var tbody;
     var template;
+    var username,password,firstName,lastName,role,userId;
     var userService = new UserServiceClient();
     jQuery(main);
 
@@ -16,12 +17,58 @@
         userService.findAllUsers().then(renderUsers);
     }
 
+    function validatePassword (password) {
+        var pwdReg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$/;
+        return pwdReg.test(password);
+    }
+
     function createUser() {
-        var username = $('#usernameFld').val();
-        var password = $('#passwordFld').val();
-        var firstName = $('#firstNameFld').val();
-        var lastName = $('#lastNameFld').val();
-        var role = $('#roleFld').val();
+        if ($('#usernameFld').val().length == 0){
+            alert('Please provide Username');
+            return;
+        }
+        else {
+            username = $('#usernameFld').val();
+        }
+        if($('#passwordFld').val().length ==0){
+            alert('Please provide a valid password');
+            return;
+        }
+        else{
+
+            password= $('#passwordFld').val();
+            if(validatePassword(password) == true)
+            {
+                password= $('#passwordFld').val();
+            }
+            else{
+                alert('Password must contain atleast 6 characters,1 digit,1 lower case and 1 upper case');
+                return;
+            }
+        }
+        if ($('#firstNameFld').val().length == 0){
+            alert('Please provide first name');
+            return;
+        }
+        else {
+            firstName = $('#firstNameFld').val();
+        }
+
+        if ($('#lastNameFld').val().length == 0){
+            alert('Please provide last name');
+            return;
+        }
+        else {
+            lastName = $('#lastNameFld').val();
+        }
+        if ($('#roleFld').val().length == 0){
+            alert('Please select one of the roles');
+            return;
+        }
+        else {
+            role = $('#roleFld').val();
+        }
+
 
         var user = {
             username: username,
@@ -33,20 +80,61 @@
         }
         userService
             .createUser(user)
-            .then(findAllUsers,function (response) {
-                alert('User added');
-
-            });
+            .then(findAllUsers).then(function (response) {
+            alert('User added!!')
+        });
 
     }
 
     function updateUser(){
-        var userId = $('#userIdFld').val();
-        var username = $('#usernameFld').val();
-        var password = $('#passwordFld').val();
-        var firstName = $('#firstNameFld').val();
-        var lastName = $('#lastNameFld').val();
-        var role = $('#roleFld').val();
+
+        userId = $('#userIdFld').val();
+        if ($('#usernameFld').val().length == 0){
+            alert('Please provide Username');
+            return;
+        }
+        else {
+            username = $('#usernameFld').val();
+        }
+        if($('#passwordFld').val().length ==0){
+            alert('Please provide a valid password');
+            return;
+        }
+        else{
+
+            password= $('#passwordFld').val();
+            if(validatePassword(passwordFld) == true)
+            {
+                password= $('#passwordFld').val();
+            }
+            else{
+                alert('Password must contain atleast 6 characters,1 digit,1 lower case and 1 upper case');
+                return;
+            }
+        }
+        if ($('#firstNameFld').val().length == 0){
+            alert('Please provide first name');
+            return;
+        }
+        else {
+            firstName = $('#firstNameFld').val();
+        }
+
+        if ($('#lastNameFld').val().length == 0){
+            alert('Please provide last name');
+            return;
+        }
+        else {
+            lastName = $('#lastNameFld').val();
+        }
+        if ($('#roleFld').val().length == 0){
+            alert('Please select one of the roles');
+            return;
+        }
+        else {
+            role = $('#roleFld').val();
+        }
+
 
         var user = {
             username: username,
@@ -56,7 +144,7 @@
             role: role
 
         }
-        userService.updateUser(userId,user).then(findAllUsers,function(response){
+        userService.updateUser(userId,user).then(findAllUsers).then(function(response){
             alert('User updated!');
 
         });
@@ -87,9 +175,9 @@
             var userId = deletebtn.parent().parent().parent().attr('id');
             userService
                 .deleteUser(userId)
-                .then(findAllUsers,function (response) {
-                    alert('User Deleted!')
-                });
+                .then(findAllUsers).then(function (response) {
+                alert('User deleted!!')
+            });
         }
 
         function editUser(event) {
