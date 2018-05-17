@@ -103,7 +103,7 @@
         else{
 
             password= $('#passwordFld').val();
-            if(validatePassword(passwordFld) == true)
+            if(validatePassword(password) == true)
             {
                 password= $('#passwordFld').val();
             }
