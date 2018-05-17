@@ -37,6 +37,8 @@
                  window.location.href = "/jquery/components/profile/profile.template.client.html?username="
                      + response.username + "&userId=" + response.id;
             }
+        }).catch(function () {
+            alert('User does not exist!');
         });
 
     }
