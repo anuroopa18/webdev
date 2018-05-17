@@ -74,6 +74,7 @@ public class UserService {
 	public User register(@RequestBody User user,HttpServletResponse response) {
 		if (findUserByUsername(user.getUsername()) != null){
 			response.setStatus(401);
+			
 		}
 		else
 		{
