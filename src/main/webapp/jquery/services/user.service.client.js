@@ -8,6 +8,8 @@ function UserServiceClient() {
     this.findUserByUsername = findUserByUsername;
     this.register = register;
     this.login=login;
+    this.profile=profile;
+    this.logout = logout;
     this.url =
         '/api/user';
     this.findUserUrl =
@@ -18,7 +20,9 @@ function UserServiceClient() {
         '/api/login';
     this.findUserByCredentailsUrl =
         '/api/findUserByCredentials';
+    this.findProfileUrl ='/api/findUser/profile';
     this.updateProfileUrl ='/api/profile';
+    this.logoutUrl='/api/logout';
     var self = this;
 
     function findAllUsers(){
@@ -75,6 +79,7 @@ function UserServiceClient() {
     function register(registerUser) {
         return fetch(self.registerurl,{
             method:'post',
+            credentials: 'same-origin',
             body: JSON.stringify(registerUser),
             headers:{
                 'content-type': 'application/json'
@@ -100,6 +105,7 @@ function UserServiceClient() {
     function login(user){
         return fetch(self.loginUrl,{
             method:'post',
+            credentials: 'same-origin',
             body: JSON.stringify(user),
             headers:{
                 'content-type': 'application/json'
@@ -109,6 +115,15 @@ function UserServiceClient() {
 
         });
 
+    }
+
+    function profile(){
+        return fetch(self.findProfileUrl,{
+            method:'get',
+            credentials: 'same-origin'
+        }).then(function(response){
+            return response.json();
+        });
     }
 
     function updateProfile(user){
@@ -124,6 +139,13 @@ function UserServiceClient() {
         });
     }
 
+    function logout(){
+        return fetch(self.logoutUrl,{
+            method:'post'
+        }).then(function(response){
+            return response.json();
+        });
+    }
 
 
 }

@@ -1,9 +1,8 @@
 package webdev.services;
-
 import java.util.List;
 import java.util.Optional;
+import javax.servlet.http.HttpSession;
 
-import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +19,7 @@ import webdev.repositories.UserRepository;
 public class UserService {
 	@Autowired
 	UserRepository repository;
+	
 
 	@PostMapping("/api/user")
 	public User createUser(@RequestBody User user) {
@@ -71,17 +71,17 @@ public class UserService {
 	}
 	
 	@PostMapping("/api/register")
-	public User register(@RequestBody User user,HttpServletResponse response) {
-		if (findUserByUsername(user.getUsername()) != null){
-			response.setStatus(401);
-			
-		}
-		else
+	public User register(@RequestBody User user,HttpSession session) {
+		if (findUserByUsername(user.getUsername()) == null)
 		{
-		 return createUser(user);
+		   createUser(user);
+		   session.setAttribute("currentUser", user);
+		   return user;
+
 		}
 		
 		return null;
+		
 	}
 	
 	@GetMapping("/api/findUserByCredentials/{user}")
@@ -94,16 +94,13 @@ public class UserService {
 	}
 	
 	@PostMapping("/api/login")
-	public User login(@RequestBody User user,HttpServletResponse response) {
+	public User login(@RequestBody User user,HttpSession session) {
 		
 		User checkUser;
-		if(findUserByCredentails(user) == null) {
-			response.setStatus(401);
-		}
-		else
-		{
+		if(findUserByCredentails(user) != null) {
 			checkUser= findUserByUsername(user.getUsername());
-			return checkUser;
+			 session.setAttribute("currentUser", checkUser);
+			 return checkUser;
 		}
 		return null;
 	}
@@ -123,4 +120,17 @@ public class UserService {
 		}
 		return null;
 	}
+	
+	@GetMapping("/api/findUser/profile")
+	public User profile(HttpSession session) {
+	   User currentUser = (User)session.getAttribute("currentUser");	
+	   return currentUser;
+	}
+	
+	@PostMapping("/api/logout")
+	public void logout(HttpSession session) {
+		session.invalidate();
+	}
+
+
 }

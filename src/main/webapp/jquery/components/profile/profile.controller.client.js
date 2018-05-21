@@ -1,7 +1,7 @@
 (function () {
     var username, phone,email,role,dateOfbirth;
     var userService = new UserServiceClient();
-    var qUsername, qUserId;
+   // var qUsername, qUserId;
 
 
     $(main);
@@ -9,16 +9,21 @@
     function main() {
         $('#btnLogout').click(logout);
         $('#btnUpdate').click(updateProfile);
-        qUsername=getURLParameter('username');
-        qUserId=getURLParameter('userId');
-        findUserById(qUserId);
+        //qUsername=getURLParameter('username');
+        //qUserId=getURLParameter('userId');
+        findUser();
     }
     function logout() {
-        window.location.href="/jquery/components/login/login.template.client.html";
+        userService.logout().then(redirect);
+
 
     }
 
-    function getURLParameter(sParam) {
+    function redirect() {
+        window.location.href="/jquery/components/login/login.template.client.html";
+    }
+
+    /*function getURLParameter(sParam) {
         var sPageURL = window.location.search.substring(1);
         var sURLVariables = sPageURL.split('&');
         for (var i = 0; i < sURLVariables.length; i++) {
@@ -27,10 +32,14 @@
                 return sParameterName[1];
             }
         }
-    }
+    }*/
 
-    function findUserById(qUserId){
+   /* function findUserById(qUserId){
         userService.findUserById(qUserId).then(renderUser)
+    }*/
+
+    function findUser() {
+        userService.profile().then(renderUser);
     }
 
     function renderUser(user){

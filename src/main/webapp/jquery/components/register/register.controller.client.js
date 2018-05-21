@@ -58,16 +58,11 @@
 
             }
             userService.register(registerUser).then(function(response) {
+                    //window.location.href = "/jquery/components/profile/profile.template.client.html?username="
+                       // + response.username + "&userId=" + response.id;
 
-                if(response.status == 401)
-                {
-                    alert('User already exists!');
-                }
-                else
-                {
-                    window.location.href = "/jquery/components/profile/profile.template.client.html?username="
-                        + response.username + "&userId=" + response.id;
-                }
+                window.location.href = "/jquery/components/profile/profile.template.client.html";
+
             }).catch(function () {
                 alert('User already exists!');
             });

@@ -28,15 +28,7 @@
 
         }
         userService.login(loginUser).then(function(response) {
-            if(response.status == 401)
-            {
-                alert('User does not exist!');
-            }
-            else
-            {
-                 window.location.href = "/jquery/components/profile/profile.template.client.html?username="
-                     + response.username + "&userId=" + response.id;
-            }
+                 window.location.href = "/jquery/components/profile/profile.template.client.html";
         }).catch(function () {
             alert('User does not exist!');
         });
