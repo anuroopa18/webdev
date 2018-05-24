@@ -1,8 +1,14 @@
 package webdev.models;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 
 @Entity
@@ -11,11 +17,25 @@ public class Course {
 	 @GeneratedValue(strategy=GenerationType.IDENTITY)
 	 private int id;
 	 private String title;
+	 
+	 @CreationTimestamp
+	 @JsonFormat(pattern = "MMMM"+" "+"dd"+","+" "+"yyyy")
 	 @Temporal(TemporalType.TIMESTAMP)
 	 private Date created;
+	 
+	 @UpdateTimestamp
+	 @JsonFormat(pattern = "MMMM"+" "+"dd"+","+" "+"yyyy")
 	 @Temporal(TemporalType.TIMESTAMP)
 	 private Date modified;
+	 @OneToMany(mappedBy="course")
+	 private List<Module> modules;
 	 
+	public List<Module> getModules() {
+		return modules;
+	}
+	public void setModules(List<Module> modules) {
+		this.modules = modules;
+	}
 	public int getId() {
 		return id;
 	}

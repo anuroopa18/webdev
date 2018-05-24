@@ -3,6 +3,7 @@ package webdev.services;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,7 @@ import webdev.models.Course;
 import webdev.repositories.CourseRepository;
 
 @RestController
+@CrossOrigin(origins="*",maxAge=3600)
 public class CourseService {
 	@Autowired
 	CourseRepository repository;
@@ -29,7 +31,7 @@ public class CourseService {
 	}
 
 	@GetMapping("/api/course")
-	public List<Course> findAllUsers() {
+	public List<Course> findAllCourses() {
 		return (List<Course>) repository.findAll();
 	}
      
@@ -42,21 +44,19 @@ public class CourseService {
 		return null;
 	}
 
-	/*@PutMapping("/api/course/{id}")
-	public Course updateUser(@PathVariable("id") int cid, @RequestBody User newUser) {
+	@PutMapping("/api/course/{id}")
+	public Course updateCourse(@PathVariable("id") int cid, @RequestBody Course newCourse) {
 		Optional<Course> data = repository.findById(cid);
 		if(data.isPresent()) {
 			Course course = data.get();
-			user.setFirstName(newUser.getFirstName());
-			user.setUsername(newUser.getUsername());
-			user.setLastName(newUser.getLastName());
-			user.setPassword(newUser.getPassword());
-			user.setRole(newUser.getRole());
-			repository.save(user);
-			return user;
+			course.setTitle(newCourse.getTitle());
+			course.setCreated(newCourse.getCreated());
+			course.setModified(newCourse.getModified());
+			repository.save(newCourse);
+			return newCourse;
 		}
 		return null;
-	}*/
+	}
 
 
 }
