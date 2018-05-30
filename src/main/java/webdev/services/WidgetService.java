@@ -35,7 +35,7 @@ public class WidgetService {
 	}
 
 	@GetMapping("/api/widget/{widgetId}")
-	public Widget findCourseById(@PathVariable("widgetId") int wid) {
+	public Widget findWidgetById(@PathVariable("widgetId") int wid) {
 		Optional<Widget> data = repository.findById(wid);
 		if (data.isPresent()) {
 			return data.get();
@@ -106,7 +106,7 @@ public class WidgetService {
 		Optional<Lesson> data = lessonRepository.findById(lessonId);
 		if(data.isPresent()) {
 			Lesson lesson = data.get();
-			return lesson.getWidget();
+			return repository.findAllWidgetsForLessons(lesson);
 		}
 		return list;		
 	}
