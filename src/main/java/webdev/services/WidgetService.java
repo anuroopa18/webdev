@@ -86,7 +86,8 @@ public class WidgetService {
 	
 	@PostMapping("/api/lesson/{lessonId}/widget/save")
 	public void saveWidgets(@PathVariable("lessonId") int lessonId, @RequestBody List<Widget> newWidgets) {
-		repository.deleteAll();
+		List<Widget> widgetsToDelete =findAllWidgetsForLesson(lessonId);
+		repository.deleteAll(widgetsToDelete);
 		Optional<Lesson> data = lessonRepository.findById(lessonId);
 		if (data.isPresent()) {
 			Lesson lesson = data.get();
