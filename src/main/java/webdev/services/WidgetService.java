@@ -58,7 +58,7 @@ public class WidgetService {
 			widget.setSrc(newWidget.getSrc());
 			widget.setStyle(newWidget.getStyle());
 			widget.setText(newWidget.getText());
-			widget.setWidgetType(newWidget.getWidgetType());
+			widget.setwType(newWidget.getwType());
 			widget.setWidth(newWidget.getWidth());
 			widget.setName(newWidget.getName());
 			repository.save(newWidget);

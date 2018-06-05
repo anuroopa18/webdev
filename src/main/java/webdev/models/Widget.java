@@ -27,7 +27,7 @@ public class Widget {
 	private int size;
 	private String href;
 	private String src;
-	private String widgetType;
+	private String wType;
 	private String listItems;
 	@Enumerated(EnumType.STRING)
 	private ListType listType;
@@ -133,12 +133,14 @@ public class Widget {
 
 	
 
-	public String getWidgetType() {
-		return widgetType;
+	
+
+	public String getwType() {
+		return wType;
 	}
 
-	public void setWidgetType(String widgetType) {
-		this.widgetType = widgetType;
+	public void setwType(String wType) {
+		this.wType = wType;
 	}
 
 	public String getListItems() {

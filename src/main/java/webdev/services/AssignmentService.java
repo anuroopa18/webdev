@@ -49,7 +49,7 @@ public class AssignmentService {
 			Lesson lesson = data.get();
 			wlist.addAll(lesson.getWidget()) ;
 			for(Widget w: wlist) {
-				if(w.getWidgetType() != "Assignment")
+				if(w.getwType() != "Assignment")
 				{
                      wlist.remove(w);
 				}

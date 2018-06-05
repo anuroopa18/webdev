@@ -53,7 +53,7 @@ public class ExamService {
 			Lesson lesson = data.get();
 			wlist.addAll(lesson.getWidget()) ;
 			for(Widget w: wlist) {
-				if(w.getWidgetType() != "Exam")
+				if(w.getwType() != "Exam")
 				{
                      wlist.remove(w);
 				}
