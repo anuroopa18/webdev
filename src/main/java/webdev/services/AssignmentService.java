@@ -90,9 +90,15 @@ public class AssignmentService {
 		Optional<Assignment> data = assignmentRepository.findById(aid);
 		if(data.isPresent()) {
 			Assignment assignment = data.get();
+			if(newAssignment.getTitle() != null) {
 			assignment.setTitle(newAssignment.getTitle());
+			}
+			if (newAssignment.getDescription() != null) {
 			assignment.setDescription(newAssignment.getDescription());
+			}
+			if(newAssignment.getPoints() != 0) {
 			assignment.setPoints(newAssignment.getPoints());
+			}
 			assignmentRepository.save(assignment);
 			return assignment;
 		}
