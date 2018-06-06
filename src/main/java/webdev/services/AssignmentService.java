@@ -93,8 +93,8 @@ public class AssignmentService {
 			assignment.setDescription(assignment.getDescription());
 			assignment.setPoints(assignment.getPoints());
 			assignment.setLesson(assignment.getLesson());
-			assignmentRepository.save(newAssignment);
-			return newAssignment;
+			assignmentRepository.save(assignment);
+			return assignment;
 		}
 		return null;
 	}
