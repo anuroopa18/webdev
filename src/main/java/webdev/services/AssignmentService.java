@@ -89,10 +89,10 @@ public class AssignmentService {
 		Optional<Assignment> data = assignmentRepository.findById(aid);
 		if(data.isPresent()) {
 			Assignment assignment = data.get();
-			assignment.setTitle(assignment.getTitle());
-			assignment.setDescription(assignment.getDescription());
-			assignment.setPoints(assignment.getPoints());
-			assignment.setLesson(assignment.getLesson());
+			assignment.setTitle(newAssignment.getTitle());
+			assignment.setDescription(newAssignment.getDescription());
+			assignment.setPoints(newAssignment.getPoints());
+			assignment.setLesson(newAssignment.getLesson());
 			assignmentRepository.save(assignment);
 			return assignment;
 		}
