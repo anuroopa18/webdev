@@ -17,7 +17,7 @@ public class BaseExamQuestion {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private String title;
-	private String subtitle;
+	private String description;
 	private String type;
 	@ManyToOne
 	@JsonIgnore
@@ -34,11 +34,12 @@ public class BaseExamQuestion {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getSubtitle() {
-		return subtitle;
+	
+	public String getDescription() {
+		return description;
 	}
-	public void setSubtitle(String subtitle) {
-		this.subtitle = subtitle;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	public int getPoints() {
 		return points;
