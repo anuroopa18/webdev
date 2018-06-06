@@ -13,7 +13,14 @@ public class Exam extends Widget {
 	@JsonIgnore
 	private List<BaseExamQuestion> questions;
 	
+	private String examTitle;
 	
+	public String getExamTitle() {
+		return examTitle;
+	}
+	public void setExamTitle(String examTitle) {
+		this.examTitle = examTitle;
+	}
 	public List<BaseExamQuestion> getQuestions() {
 		return questions;
 	}
