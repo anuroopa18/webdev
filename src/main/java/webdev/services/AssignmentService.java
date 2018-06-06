@@ -96,7 +96,9 @@ public class AssignmentService {
 			if (newAssignment.getDescription() != null && !newAssignment.getTitle().equals("")) {
 			assignment.setDescription(newAssignment.getDescription());
 			}
+			if(newAssignment.getPoints() != 0) {
 			assignment.setPoints(newAssignment.getPoints());
+			}
 			assignmentRepository.save(assignment);
 			return assignment;
 		}
