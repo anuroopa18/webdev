@@ -78,6 +78,7 @@ public class AssignmentService {
 
 		if(data.isPresent()) {
 			Lesson lesson = data.get();
+			newAssignment.setId(Integer.MAX_VALUE);
 			newAssignment.setLesson(lesson);
 			return assignmentRepository.save(newAssignment);
 		}
