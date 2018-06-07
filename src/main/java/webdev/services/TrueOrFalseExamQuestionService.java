@@ -35,6 +35,7 @@ public class TrueOrFalseExamQuestionService {
 		Optional<Exam> data = examRepository.findById(examId);
 		if(data.isPresent()) {
 			Exam exam = data.get();
+			newTrueOrFalseExamQuestion.setId(Integer.MAX_VALUE);
 			newTrueOrFalseExamQuestion.setExam(exam);
 			return trueOrFalseExamQuestionRepository.save(newTrueOrFalseExamQuestion);
 		}

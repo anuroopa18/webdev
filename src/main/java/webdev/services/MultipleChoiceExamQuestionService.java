@@ -36,6 +36,7 @@ public class MultipleChoiceExamQuestionService {
 		Optional<Exam> data = examRepository.findById(examId);
 		if(data.isPresent()) {
 			Exam exam = data.get();
+			newMultipleChoiceExamQuestion.setId(Integer.MAX_VALUE);
 			newMultipleChoiceExamQuestion.setExam(exam);
 			return multipleChoiceExamRepository.save(newMultipleChoiceExamQuestion);
 		}

@@ -35,6 +35,7 @@ public class FillInTheBlanksExamQuestionService {
 		Optional<Exam> data = examRepository.findById(examId);
 		if(data.isPresent()) {
 			Exam exam = data.get();
+			newFillInTheBlanksExamQuestion.setId(Integer.MAX_VALUE);
 			newFillInTheBlanksExamQuestion.setExam(exam);
 			return fillIntheBlanksExamQuestionRepository.save(newFillInTheBlanksExamQuestion);
 		}

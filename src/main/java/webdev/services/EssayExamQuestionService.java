@@ -35,6 +35,7 @@ public class EssayExamQuestionService {
 		Optional<Exam> data = examRepository.findById(examId);
 		if(data.isPresent()) {
 			Exam exam = data.get();
+			newEssayExamQuestion.setId(Integer.MAX_VALUE);
 			newEssayExamQuestion.setExam(exam);
 			return essayExamQuestionRepository.save(newEssayExamQuestion);
 		}
