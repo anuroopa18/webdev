@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import webdev.models.BaseExamQuestion;
@@ -81,6 +82,32 @@ public class MultipleChoiceExamQuestionService {
 	public void deleteMultipleChoiceExamQuestion(@PathVariable("id") int id)
 	{
 		multipleChoiceExamRepository.deleteById(id);
+	}
+	
+	@PutMapping("/api/choice/{id}")
+	public MultipleChoiceExamQuestion updateMultipleChoiceExamQuestion(@PathVariable("id") int qid, @RequestBody MultipleChoiceExamQuestion newMultipleChoiceExamQuestion) {
+		Optional<MultipleChoiceExamQuestion> data = multipleChoiceExamRepository.findById(qid);
+		if(data.isPresent()) {
+			MultipleChoiceExamQuestion multipleChoiceExamQuestion = data.get();
+			if(newMultipleChoiceExamQuestion.getTitle() != null && !newMultipleChoiceExamQuestion.getTitle().equals("") ) {
+				multipleChoiceExamQuestion.setTitle(newMultipleChoiceExamQuestion.getTitle());
+			}
+			if (newMultipleChoiceExamQuestion.getDescription() != null && !newMultipleChoiceExamQuestion.getDescription().equals("")) {
+				multipleChoiceExamQuestion.setDescription(newMultipleChoiceExamQuestion.getDescription());
+			}
+			if(newMultipleChoiceExamQuestion.getPoints() != 0) {
+				multipleChoiceExamQuestion.setPoints(newMultipleChoiceExamQuestion.getPoints());
+			}
+			if (newMultipleChoiceExamQuestion.getCorrectOption() != 0) {
+				multipleChoiceExamQuestion.setCorrectOption(newMultipleChoiceExamQuestion.getCorrectOption());
+			}
+			if (newMultipleChoiceExamQuestion.getOptions() != null && !newMultipleChoiceExamQuestion.getOptions().equals("")) {
+				multipleChoiceExamQuestion.setOptions(newMultipleChoiceExamQuestion.getOptions());
+			}
+			multipleChoiceExamRepository.save(multipleChoiceExamQuestion);
+			return multipleChoiceExamQuestion;
+		}
+		return null;
 	}
 	
 

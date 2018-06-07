@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import webdev.models.BaseExamQuestion;
@@ -82,6 +83,27 @@ public class EssayExamQuestionService {
 	public void deleteEssayExamQuestion(@PathVariable("id") int id)
 	{
 		essayExamQuestionRepository.deleteById(id);
+	}
+	
+	@PutMapping("/api/essay/{id}")
+	public EssayExamQuestion updateEssayExamQuestion(@PathVariable("id") int qid, @RequestBody EssayExamQuestion newEssayExamQuestion) {
+		Optional<EssayExamQuestion> data = essayExamQuestionRepository.findById(qid);
+		if(data.isPresent()) {
+			EssayExamQuestion essayExamQuestion = data.get();
+			if(newEssayExamQuestion.getTitle() != null && !newEssayExamQuestion.getTitle().equals("") ) {
+				essayExamQuestion.setTitle(newEssayExamQuestion.getTitle());
+			}
+			if (newEssayExamQuestion.getDescription() != null && !newEssayExamQuestion.getDescription().equals("")) {
+				essayExamQuestion.setDescription(newEssayExamQuestion.getDescription());
+			}
+			if(newEssayExamQuestion.getPoints() != 0) {
+				essayExamQuestion.setPoints(newEssayExamQuestion.getPoints());
+			}
+			
+			essayExamQuestionRepository.save(essayExamQuestion);
+			return essayExamQuestion;
+		}
+		return null;
 	}
 	
 

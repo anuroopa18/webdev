@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import webdev.models.BaseExamQuestion;
@@ -80,6 +81,29 @@ public class TrueOrFalseExamQuestionService {
 	public void deleteTrueOrfalseQuestion(@PathVariable("id") int id)
 	{
 		trueOrFalseExamQuestionRepository.deleteById(id);
+	}
+	
+	@PutMapping("/api/truefalse/{id}")
+	public TrueOrFalseExamQuestion updateTrueOrFalseExamQuestion(@PathVariable("id") int qid, @RequestBody TrueOrFalseExamQuestion newTrueOrFalseExamQuestion) {
+		Optional<TrueOrFalseExamQuestion> data = trueOrFalseExamQuestionRepository.findById(qid);
+		if(data.isPresent()) {
+			TrueOrFalseExamQuestion trueOrFalseExamQuestion = data.get();
+			if(newTrueOrFalseExamQuestion.getTitle() != null && !newTrueOrFalseExamQuestion.getTitle().equals("") ) {
+				trueOrFalseExamQuestion.setTitle(newTrueOrFalseExamQuestion.getTitle());
+			}
+			if (newTrueOrFalseExamQuestion.getDescription() != null && !newTrueOrFalseExamQuestion.getDescription().equals("")) {
+				trueOrFalseExamQuestion.setDescription(newTrueOrFalseExamQuestion.getDescription());
+			}
+			if(newTrueOrFalseExamQuestion.getPoints() != 0) {
+				trueOrFalseExamQuestion.setPoints(newTrueOrFalseExamQuestion.getPoints());
+			}
+			if (newTrueOrFalseExamQuestion.isTrue() != false) {
+				trueOrFalseExamQuestion.setTrue(newTrueOrFalseExamQuestion.isTrue());
+			}
+			trueOrFalseExamQuestionRepository.save(trueOrFalseExamQuestion);
+			return trueOrFalseExamQuestion;
+		}
+		return null;
 	}
 
 

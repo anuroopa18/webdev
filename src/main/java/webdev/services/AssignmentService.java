@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import webdev.models.Assignment;
-import webdev.models.Course;
 import webdev.models.Lesson;
 import webdev.models.Widget;
 import webdev.repositories.AssignmentRepository;
