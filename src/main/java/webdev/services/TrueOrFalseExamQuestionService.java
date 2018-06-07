@@ -98,8 +98,8 @@ public class TrueOrFalseExamQuestionService {
 			if(newTrueOrFalseExamQuestion.getPoints() != 0) {
 				trueOrFalseExamQuestion.setPoints(newTrueOrFalseExamQuestion.getPoints());
 			}
-			if (newTrueOrFalseExamQuestion.isTrue() != false) {
-				trueOrFalseExamQuestion.setTrue(newTrueOrFalseExamQuestion.isTrue());
+			if (newTrueOrFalseExamQuestion.getisTrue() != false) {
+				trueOrFalseExamQuestion.setisTrue(newTrueOrFalseExamQuestion.getisTrue());
 			}
 			trueOrFalseExamQuestionRepository.save(trueOrFalseExamQuestion);
 			return trueOrFalseExamQuestion;
