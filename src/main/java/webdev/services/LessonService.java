@@ -57,7 +57,7 @@ public class LessonService {
 		}
 		return null;
 	}
-	@GetMapping("/api/course/{cid}/module/{mid}/lesson")
+	@GetMapping("/api/module/{mid}/lesson")
 	public List<Lesson> findAllLessonsForModule(
 			@PathVariable("mid") int moduleId) {
 		List<Lesson> list = new ArrayList<>();
